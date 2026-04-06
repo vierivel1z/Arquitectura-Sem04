@@ -1,0 +1,465 @@
+:root {
+    --bg-main: #0B0E14;
+    --bg-panel: #151A22;
+    --bg-card: #202735;
+    
+    --text-main: #E2E8F0;
+    --text-muted: #8B94A5;
+    
+    --accent-blue: #3B82F6;
+    --accent-blue-hover: #2563EB;
+    
+    --accent-green: #10B981;
+    --accent-yellow: #F59E0B;
+    --accent-red: #EF4444;
+    --accent-purple: #8B5CF6;
+    --accent-orange: #FB923C;
+    --accent-cyan: #22D3EE;
+
+    --font-ui: 'Inter', sans-serif;
+    --font-code: 'Fira Code', monospace;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-ui);
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Header */
+.navbar {
+    background-color: var(--bg-panel);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 0.8rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-weight: 800;
+    font-size: 1.25rem;
+    color: var(--text-main);
+    letter-spacing: -0.5px;
+}
+
+.header-title {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* ========== TAB BAR ========== */
+.tab-bar {
+    display: flex;
+    gap: 0;
+    background-color: var(--bg-panel);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.05);
+    padding: 0 1.5rem;
+}
+
+.tab {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    font-family: var(--font-ui);
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.tab:hover {
+    color: var(--text-main);
+    background: rgba(255,255,255,0.03);
+}
+
+.tab.active {
+    color: white;
+}
+
+.tab-suma.active { border-bottom-color: var(--accent-blue); color: var(--accent-blue); }
+.tab-resta.active { border-bottom-color: var(--accent-orange); color: var(--accent-orange); }
+.tab-mult.active { border-bottom-color: var(--accent-purple); color: var(--accent-purple); }
+.tab-div.active { border-bottom-color: var(--accent-red); color: var(--accent-red); }
+
+.tab-icon { font-size: 1.1rem; }
+.tab-text { white-space: nowrap; }
+
+/* Layout Main Container */
+.container {
+    flex: 1;
+    display: flex;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    height: calc(100vh - 110px);
+}
+
+.panel {
+    background-color: var(--bg-panel);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+}
+
+.panel-header {
+    padding: 0.8rem 1rem;
+    background-color: rgba(0, 0, 0, 0.2);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* --- Panel Izquierdo: Codigo --- */
+.panel-code {
+    flex: 1;
+    min-width: 280px;
+}
+
+.code-container {
+    padding: 0.8rem;
+    font-family: var(--font-code);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.line {
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    display: flex;
+    gap: 10px;
+    border-left: 3px solid transparent;
+}
+
+.line.active {
+    background-color: rgba(59, 130, 246, 0.15);
+    border-left: 3px solid var(--accent-blue);
+}
+
+.line.active-pop {
+    background-color: rgba(245, 158, 11, 0.15);
+    border-left: 3px solid var(--accent-yellow);
+}
+
+.line.active-add {
+    background-color: rgba(16, 185, 129, 0.15);
+    border-left: 3px solid var(--accent-green);
+}
+
+.line.active-sub {
+    background-color: rgba(251, 146, 60, 0.15);
+    border-left: 3px solid var(--accent-orange);
+}
+
+.line.active-mul {
+    background-color: rgba(139, 92, 246, 0.15);
+    border-left: 3px solid var(--accent-purple);
+}
+
+.line.active-div {
+    background-color: rgba(239, 68, 68, 0.15);
+    border-left: 3px solid var(--accent-red);
+}
+
+.lineNumber { color: #4B5563; user-select: none; width: 25px; text-align: right; display: inline-block; }
+.instruction { color: #60A5FA; font-weight: 600; width: 45px; display: inline-block;}
+.register { color: #F87171; }
+.number { color: #A78BFA; }
+.comment { color: #9CA3AF; font-style: italic; }
+.label { color: #FCD34D; font-weight: 600; }
+
+/* --- Panel Central: La Pila --- */
+.panel-stack {
+    flex: 1;
+    min-width: 280px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.stack-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 1.5rem;
+}
+
+.stack-container {
+    display: flex;
+    flex-direction: column;
+    width: 140px;
+    border: 3px solid #374151;
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+    padding: 8px;
+    gap: 4px;
+    background-color: rgba(0, 0, 0, 0.2);
+    position: relative;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.stack-slot {
+    height: 46px;
+    border-radius: 6px;
+    border: 2px dashed #4B5563;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: all 0.3s ease;
+    background: transparent;
+}
+
+.stack-slot.filled {
+    border: 2px solid var(--accent-purple);
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.2) 0%, rgba(139, 92, 246, 0.4) 100%);
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.3);
+}
+
+.slot-address {
+    position: absolute;
+    left: -65px;
+    color: var(--text-muted);
+    font-family: var(--font-code);
+    font-size: 0.75rem;
+}
+
+.slot-content {
+    font-family: var(--font-code);
+    font-weight: 800;
+    font-size: 1.15rem;
+    color: white;
+}
+
+/* Flying Box Animation */
+.flying-box {
+    position: absolute;
+    width: 120px;
+    height: 44px;
+    border-radius: 6px;
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.8) 0%, rgba(139, 92, 246, 1) 100%);
+    color: white;
+    font-family: var(--font-code);
+    font-weight: 800;
+    font-size: 1.15rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.6);
+    z-index: 100;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.flying-box.hidden {
+    opacity: 0;
+    transform: scale(0.5);
+    transition: none;
+}
+
+.stack-pointer-label {
+    position: absolute;
+    font-family: var(--font-code);
+    color: var(--accent-green);
+    font-weight: 600;
+    transition: bottom 0.4s ease;
+    left: -110px;
+    font-size: 0.9rem;
+}
+
+/* --- Panel Derecho --- */
+.right-column {
+    flex: 1.2;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    padding-bottom: 0;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+.cpu-container {
+    background-color: var(--bg-panel);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    flex-direction: column;
+}
+
+.registers {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+    padding: 1rem;
+}
+
+.register-card {
+    background-color: var(--bg-card);
+    border-radius: 8px;
+    padding: 0.7rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.02);
+    transition: all 0.3s ease;
+}
+
+.register-card.pop {
+    transform: scale(1.05);
+    background-color: rgba(59, 130, 246, 0.1);
+    border: 1px solid var(--accent-blue);
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+}
+
+.register-card.math {
+    transform: scale(1.05);
+    background-color: rgba(16, 185, 129, 0.1);
+    border: 1px solid var(--accent-green);
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
+}
+
+.reg-title {
+    font-weight: 600;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+
+.reg-value {
+    font-family: var(--font-code);
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: white;
+}
+
+/* Explanation */
+.explanation-container {
+    flex: 1;
+    background-color: var(--bg-panel);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    flex-direction: column;
+}
+
+#step-explanation {
+    padding: 1rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--text-main);
+}
+#step-explanation strong {
+    color: var(--accent-yellow);
+}
+
+/* Controles */
+.controls {
+    display: flex;
+    gap: 0.8rem;
+    background-color: var(--bg-panel);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 0.8rem;
+    justify-content: space-between;
+}
+
+.btn {
+    padding: 0.65rem 1.1rem;
+    border: none;
+    border-radius: 8px;
+    font-family: var(--font-ui);
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: #374151 !important;
+}
+
+.btn-primary {
+    background-color: var(--accent-blue);
+    color: white;
+    flex: 2;
+}
+
+.btn-primary:not(:disabled):hover {
+    background-color: var(--accent-blue-hover);
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background-color: #374151;
+    color: white;
+    flex: 1;
+}
+
+.btn-secondary:not(:disabled):hover {
+    background-color: #4B5563;
+}
+
+.btn-danger {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: var(--accent-red);
+    border: 1px solid var(--accent-red);
+}
+
+.btn-danger:not(:disabled):hover {
+    background-color: rgba(239, 68, 68, 0.2);
+}
+
+/* Console Box */
+.console-wrapper {
+    background-color: var(--bg-panel);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    flex-direction: column;
+}
+
+.console-box {
+    background-color: black;
+    color: #10B981;
+    font-family: var(--font-code);
+    padding: 0.8rem;
+    height: 90px;
+    font-size: 0.85rem;
+    overflow-y: hidden;
+    line-height: 1.4;
+}
+
+.console-text-new {
+    color: #E5E7EB;
+}

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚡ Simulador Visual Ensamblador 8086 - Operaciones Aritméticas</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo">🖥️ 8086 Visual Simulator</div>
+        <div class="header-title">Operaciones Aritméticas con la Pila (Stack)</div>
+    </header>
+
+    <!-- Barra de Pestañas -->
+    <div class="tab-bar" id="tab-bar">
+        <button class="tab tab-suma active" data-op="suma" id="tab-suma">
+            <span class="tab-icon">➕</span><span class="tab-text">Suma</span>
+        </button>
+        <button class="tab tab-resta" data-op="resta" id="tab-resta">
+            <span class="tab-icon">➖</span><span class="tab-text">Resta</span>
+        </button>
+        <button class="tab tab-mult" data-op="multiplicacion" id="tab-multiplicacion">
+            <span class="tab-icon">✖️</span><span class="tab-text">Multiplicación</span>
+        </button>
+        <button class="tab tab-div" data-op="division" id="tab-division">
+            <span class="tab-icon">➗</span><span class="tab-text">División</span>
+        </button>
+    </div>
+
+    <main class="container">
+        <!-- Panel Izquierdo: Código -->
+        <section class="panel panel-code">
+            <div class="panel-header" id="code-panel-title">📝 Código Fuente</div>
+            <div class="code-container" id="code-container">
+                <!-- Generado dinámicamente por JS -->
+            </div>
+        </section>
+
+        <!-- Panel Central: Animación de la Pila -->
+        <section class="panel panel-stack">
+            <div class="panel-header">📚 Memoria Pila (Stack)</div>
+            <div class="stack-wrapper">
+                <div class="stack-container" id="stack-container">
+                    <div class="stack-pointer-label" id="sp-label">SP ➡️</div>
+                    <div class="stack-slot" id="slot-4"><span class="slot-address">0xFFF6</span><span class="slot-content"></span></div>
+                    <div class="stack-slot" id="slot-3"><span class="slot-address">0xFFF8</span><span class="slot-content"></span></div>
+                    <div class="stack-slot" id="slot-2"><span class="slot-address">0xFFFA</span><span class="slot-content"></span></div>
+                    <div class="stack-slot" id="slot-1"><span class="slot-address">0xFFFC</span><span class="slot-content"></span></div>
+                    <div class="stack-slot" id="slot-0"><span class="slot-address">0xFFFE</span><span class="slot-content"></span></div>
+                </div>
+            </div>
+            <div id="flying-box" class="flying-box hidden">0</div>
+        </section>
+
+        <!-- Panel Derecho: Registros y Controles -->
+        <section class="panel right-column">
+            <div class="cpu-container">
+                <div class="panel-header">🧠 CPU (Registros)</div>
+                <div class="registers">
+                    <div class="register-card axi" id="reg-AX-card">
+                        <div class="reg-title">AX (Acumulador)</div>
+                        <div class="reg-value" id="reg-AX">0</div>
+                    </div>
+                    <div class="register-card bxi" id="reg-BX-card">
+                        <div class="reg-title">BX (Base)</div>
+                        <div class="reg-value" id="reg-BX">0</div>
+                    </div>
+                    <div class="register-card cxi" id="reg-CX-card">
+                        <div class="reg-title">CX (Contador)</div>
+                        <div class="reg-value" id="reg-CX">0</div>
+                    </div>
+                    <div class="register-card dxi" id="reg-DX-card">
+                        <div class="reg-title">DX (Datos)</div>
+                        <div class="reg-value" id="reg-DX">0</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Consola de Salida -->
+            <div class="console-wrapper">
+                <div class="panel-header">📟 Consola MS-DOS</div>
+                <div class="console-box" id="console-output">
+                    <span id="console-text">C:\> _</span>
+                </div>
+            </div>
+
+            <!-- Explicacion interactiva -->
+            <div class="explanation-container">
+                <div class="panel-header">ℹ️ Paso a Paso</div>
+                <p id="step-explanation">Selecciona una operación y haz clic en <strong>Siguiente</strong> para comenzar.</p>
+            </div>
+
+            <!-- Controles -->
+            <div class="controls">
+                <button class="btn btn-secondary" id="btn-prev" disabled>⬅️ Anterior</button>
+                <button class="btn btn-primary" id="btn-next">Siguiente ➡️</button>
+                <button class="btn btn-danger" id="btn-reset">🔄 Reiniciar</button>
+            </div>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
